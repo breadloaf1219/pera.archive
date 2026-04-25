@@ -5,10 +5,26 @@
 
 <style>
 body {
-    background-color: #dcd6c3;
+    margin: 0;
+    background-color: #e8dcc0;
     font-family: monospace;
+
+    background-image: linear-gradient(
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px
+    );
+    background-size: 100% 4px;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(rgba(0,0,0,0.03), transparent 70%);
+    pointer-events: none;
+}
+
+/* DOCUMENT */
 .document {
     background-color: #f5ecd7;
     max-width: 800px;
@@ -18,11 +34,13 @@ body {
     box-shadow: 8px 8px 0px #aaa;
 }
 
+/* HEADER */
 .header {
     border-bottom: 2px solid black;
     margin-bottom: 20px;
 }
 
+/* STAMP */
 .stamp {
     color: red;
     border: 3px solid red;
@@ -33,6 +51,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* SECTIONS */
 .section {
     margin-top: 20px;
 }
@@ -41,6 +60,7 @@ body {
     font-weight: bold;
 }
 
+/* IMAGE */
 .doc-image {
     width: 100%;
     max-width: 400px;
@@ -49,25 +69,35 @@ body {
     border: 2px solid #999;
 }
 
+/* REDACTION */
 .redacted {
     background-color: black;
     color: black;
 }
-    
+
+/* RELATED */
 .related {
-    margin-top: 20px;
+    margin-top: 30px;
     border-top: 2px solid #a5946a;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .related-file {
     display: block;
-    margin: 5px 0;
-    padding: 5px;
+    margin: 6px 0;
+    padding: 6px;
     background: #d9c89e;
     border: 1px solid #a5946a;
 }
-    
+
+/* BACK LINK */
+.back {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 8px 12px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+}
 </style>
 </head>
 
@@ -101,23 +131,23 @@ body {
 <p class="redacted">████████████████████</p>
 </div>
 
-<a href="index.html">← Return</a>
-
-</div>
-    
+<!-- RELATED CASES (NOW INSIDE FILE) -->
+<div class="related">
 <h3>RELATED CASES</h3>
 
-<div class="related">
+<a href="subject002.html" class="related-file">
+SUBJECT-002 — Heartbeat
+</a>
 
-    <a href="subject002.html" class="related-file">
-        SUBJECT-002 — Heartbeat
-    </a>
-
-    <a href="subject003.html" class="related-file">
-        SUBJECT-003 — [NAME]
-    </a>
+<a href="subject003.html" class="related-file">
+SUBJECT-003 — [NAME]
+</a>
 
 </div>
-    
+
+<a href="index.html" class="back">← Return to Database</a>
+
+</div>
+
 </body>
 </html>
