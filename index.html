@@ -24,9 +24,9 @@ p {
 
 /* SEARCH */
 #searchBar {
-    width: calc(100% - 40px);
-    margin: 10px 20px;
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
     font-family: monospace;
     border: 2px solid #a5946a;
     background: #f5ecd7;
@@ -82,14 +82,18 @@ a {
     border: 2px solid #a5946a;
     padding: 15px;
     position: relative;
-    box-shadow: 4px 4px 0px #a5946a;
-    transition: 0.2s;
+    box-shadow: 6px 6px 0px #a5946a;
+    transition: 0.25s;
     overflow: hidden;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
+/* hover "lift" */
 .file:hover {
     transform: translateY(-6px) rotate(-1deg);
     background: #cbb88a;
+    box-shadow: 10px 10px 0px #a5946a;
 }
 
 /* folder tab */
@@ -98,17 +102,20 @@ a {
     position: absolute;
     top: -12px;
     left: 12px;
-    width: 80px;
-    height: 18px;
+    width: 90px;
+    height: 20px;
     background: #cbb88a;
     border: 2px solid #a5946a;
     border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
+/* label */
 .file::after {
-    content: "FILE";
+    content: "CASE FILE";
     position: absolute;
-    top: 5px;
+    top: 6px;
     right: 10px;
     font-size: 10px;
     opacity: 0.6;
@@ -116,12 +123,28 @@ a {
 
 /* IMAGE */
 .file img {
-    width: 100%;
+    width: 85%;
     height: auto;
     margin-top: 10px;
     border: 1px solid #a5946a;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+    
+.file:active {
+    transform: scale(0.98) rotate(0deg);
 }
 
+.file a {
+    display: block;
+    transition: 0.2s;
+}
+
+.file:hover a {
+    transform: translateY(-2px);
+}
+    
 /* SEARCH HIDE FIX */
 .hidden {
     display: none !important;
@@ -131,21 +154,22 @@ a {
 
 <body>
 
-<h1>PARANORMAL ENTITY RESEARCH AGENCY DATABASE</h1>
+<h1>PARANORMAL ENTITY DATABASE</h1>
 <p>WARNING: Unauthorized access will be logged.</p>
-
-<input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
 <div class="layout">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <h2>DATABASE</h2>
-        <button onclick="showCategory('animals')">Animal-like</button>
-        <button onclick="showCategory('amalgamations')">Amalgamations</button>
-        <button onclick="showCategory('supernatural')">Supernatural</button>
-        <button onclick="showCategory('other')">Other</button>
-    </div>
+    <h2>DATABASE</h2>
+
+    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
+
+    <button onclick="showCategory('animals')">Animal-like</button>
+    <button onclick="showCategory('amalgamations')">Amalgamations</button>
+    <button onclick="showCategory('supernatural')">Supernatural</button>
+    <button onclick="showCategory('other')">Other</button>
+</div>
 
     <!-- CONTENT -->
     <div class="content">
