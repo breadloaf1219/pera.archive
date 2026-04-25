@@ -8,8 +8,29 @@ body {
     margin: 0;
     background-color: #e8dcc0;
     font-family: monospace;
-}
 
+    /* subtle paper grain effect */
+    background-image: linear-gradient(
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px
+    );
+    background-size: 100% 4px;
+}
+    
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        rgba(0,0,0,0.03),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+    
 /* HEADER */
 h1 {
     text-align: center;
@@ -26,10 +47,11 @@ p {
 #searchBar {
     width: 100%;
     padding: 8px;
-    margin: 10px 0;
+    margin: 10px 0 15px 0;
     font-family: monospace;
     border: 2px solid #a5946a;
     background: #f5ecd7;
+    box-sizing: border-box;
 }
 
 /* LINKS */
@@ -80,52 +102,49 @@ a {
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
-    padding: 15px;
+    padding: 18px 15px 15px 15px;
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
-    transition: 0.25s;
-    overflow: hidden;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    transition: 0.25s ease;
+    overflow: visible;
 }
 
-/* hover "lift" */
+/* hover feels like folder lifting */
 .file:hover {
-    transform: translateY(-6px) rotate(-1deg);
+    transform: translateY(-8px) rotate(-0.5deg);
     background: #cbb88a;
-    box-shadow: 10px 10px 0px #a5946a;
+    box-shadow: 12px 12px 0px #a5946a;
 }
 
-/* folder tab */
+/* folder tab (stronger + connected feel) */
 .file::before {
     content: "";
     position: absolute;
-    top: -12px;
-    left: 12px;
-    width: 90px;
+    top: -14px;
+    left: 14px;
+    width: 95px;
     height: 20px;
     background: #cbb88a;
     border: 2px solid #a5946a;
     border-bottom: none;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
 }
 
-/* label */
+/* label strip */
 .file::after {
     content: "CASE FILE";
     position: absolute;
     top: 6px;
     right: 10px;
     font-size: 10px;
-    opacity: 0.6;
+    opacity: 0.55;
 }
+
 
 /* IMAGE */
 .file img {
-    width: 85%;
+    width: 80%;
     height: auto;
-    margin-top: 10px;
+    margin-top: 12px;
     border: 1px solid #a5946a;
     display: block;
     margin-left: auto;
@@ -133,16 +152,13 @@ a {
 }
     
 .file:active {
-    transform: scale(0.98) rotate(0deg);
+    transform: translateY(-2px) scale(0.99);
 }
 
 .file a {
     display: block;
-    transition: 0.2s;
-}
-
-.file:hover a {
-    transform: translateY(-2px);
+    color: black;
+    text-decoration: none;
 }
     
 /* SEARCH HIDE FIX */
