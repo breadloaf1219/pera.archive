@@ -30,14 +30,25 @@ a:hover {
         }
             .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    justify-content: center;
+    gap: 30px;
 }
 
 .file {
     border: 1px solid #00ff9f;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
+    max-width: 300px;
+}
+             img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+            .file:hover {
+    background-color: #001a12;
+    cursor: pointer;
 }
             }
     </style>
@@ -54,7 +65,7 @@ a:hover {
         <a href="subject001.html">
             <h2>SUBJECT-001</h2>
             <p>Codename: "Whisperwing"</p>
-            <img src="https://via.placeholder.com/200">
+            <img src="monster1.png">
         </a>
     </div>
 
