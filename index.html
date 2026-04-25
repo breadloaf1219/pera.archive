@@ -121,6 +121,7 @@ p {
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
     transition: 0.25s ease;
+    cursor: pointer;
 }
 
 .file:hover {
@@ -157,24 +158,24 @@ p {
     border: 1px solid #a5946a;
 }
 
-.file a {
-    text-decoration: none;
-    color: black;
-}
-
-/* hidden */
+/* HIDDEN */
 .hidden {
     display: none !important;
 }
 
+/* VIEWER */
 .viewer {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+
+.viewer.active {
+    display: flex;
 }
 
 .viewer-content {
@@ -197,7 +198,6 @@ p {
     border: 1px solid #a5946a;
     cursor: pointer;
 }
-    
 </style>
 </head>
 
@@ -208,11 +208,12 @@ p {
 
 <div class="layout">
 
+<!-- SIDEBAR -->
 <div class="sidebar">
 <h2>DATABASE</h2>
 
 <p id="counter">TOTAL FILES: 0</p>
-    
+
 <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
 <div class="drawer">
@@ -239,34 +240,28 @@ p {
 </div>
 </div>
 
-    <div class="drawer">
-<div class="drawer-title" onclick="toggleDrawer(this)">Axis IV: Physical State</div>
-<div class="drawer-content">
-<button onclick="showCategory('spectral')">Spectral</button>
-<button onclick="showCategory('dimensional')">Dimensional</button>
-</div>
-</div>
-    
 </div>
 
+<!-- CONTENT -->
 <div class="content">
-    
-<div id="viewer" class="viewer hidden">
+
+<!-- VIEWER -->
+<div id="viewer" class="viewer">
     <div class="viewer-content" id="viewerContent"></div>
     <button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
 </div>
-    
-<!-- BIOLOGICAL -->
+
+<!-- CATEGORY -->
 <div id="animal_predators" class="category active">
 
-<div class="file">
-<div class="file" onclick="openFile('file1')"><h3>SUBJECT-001</h3>
+<div class="file" onclick="openFile('file1')">
+<h3>SUBJECT-001</h3>
 <p>Whisperwing</p>
 <img src="Monster 1.png">
 </div>
 
-<div class="file">
-<div class="file" onclick="openFile('file1')"><h3>SUBJECT-002</h3>
+<div class="file" onclick="openFile('file2')">
+<h3>SUBJECT-002</h3>
 <p>Heartbeat</p>
 <img src="https://via.placeholder.com/200">
 </div>
@@ -274,17 +269,15 @@ p {
 </div>
 
 <div id="animal_passive" class="category"></div>
-
-<!-- OTHER CATEGORIES -->
 <div id="fusion_entities" class="category"></div>
 <div id="corrupted_forms" class="category"></div>
 <div id="spectral" class="category"></div>
 <div id="dimensional" class="category"></div>
 
 </div>
-
 </div>
 
+<!-- SCRIPTS -->
 <script>
 function showCategory(category) {
 document.querySelectorAll('.category').forEach(div => {
@@ -312,45 +305,40 @@ function toggleDrawer(element) {
 let content = element.nextElementSibling;
 content.style.display = content.style.display === "block" ? "none" : "block";
 }
-</script>
-    
-<script>
+
 function openFile(fileId) {
-    const data = document.getElementById(fileId).innerHTML;
-    document.getElementById("viewerContent").innerHTML = data;
-    document.getElementById("viewer").classList.remove("hidden");
+const data = document.getElementById(fileId).innerHTML;
+document.getElementById("viewerContent").innerHTML = data;
+document.getElementById("viewer").classList.add("active");
 }
 
 function closeViewer() {
-    document.getElementById("viewer").classList.add("hidden");
+document.getElementById("viewer").classList.remove("active");
 }
-</script>
 
-    <script>
 function updateCounter() {
-    const count = document.querySelectorAll(".file").length;
-    document.getElementById("counter").innerText = "TOTAL FILES: " + count;
+const count = document.querySelectorAll(".category .file").length;
+document.getElementById("counter").innerText = "TOTAL FILES: " + count;
 }
 
 updateCounter();
 </script>
 
+<!-- HIDDEN FILE DATA -->
 <div id="file1" class="hidden">
-    <h1>SUBJECT-001</h1>
-    <p>Codename: Whisperwing</p>
-    <p>Threat Level: HIGH</p>
-
-    <img src="Monster 1.png" style="width:300px; display:block; margin:auto;">
-
-    <p><b>Description:</b> Write your description...</p>
-    <p><b>Behavior:</b> Write behavior...</p>
+<h1>SUBJECT-001</h1>
+<p>Codename: Whisperwing</p>
+<p>Threat Level: HIGH</p>
+<img src="Monster 1.png" style="width:300px; display:block; margin:auto;">
+<p><b>Description:</b> Write your description...</p>
+<p><b>Behavior:</b> Write behavior...</p>
 </div>
 
 <div id="file2" class="hidden">
-    <h1>SUBJECT-002</h1>
-    <p>Codename: Heartbeat</p>
-    <p>Threat Level: UNKNOWN</p>
+<h1>SUBJECT-002</h1>
+<p>Codename: Heartbeat</p>
+<p>Threat Level: UNKNOWN</p>
 </div>
-    
+
 </body>
 </html>
