@@ -214,32 +214,63 @@ p {
 
 <p id="counter">TOTAL FILES: 0</p>
 
-<input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
+<input type="text" id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
 
 <div class="drawer">
 <div class="drawer-title" onclick="toggleDrawer(this)">Axis I: Threat Level</div>
 <div class="drawer-content">
-<button onclick="showCategory('animal_predators')">Predatory</button>
-<button onclick="showCategory('animal_passive')">Passive</button>
+<button onclick="showCategory('threat_benign')">TL-0 | Benign</button>
+<button onclick="showCategory('threat_minimal')">TL-1 | Minimal</button>
+<button onclick="showCategory('threat_moderate')">TL-2 | Moderate</button>
+<button onclick="showCategory('threat_severe')">TL-3 | Severe</button>
+<button onclick="showCategory('threat_critical')">TL-4 | Critical</button>
+<button onclick="showCategory('threat_catastrophic')">TL-5 | Catastrophic</button>
+<button onclick="showCategory('threat_unknown')">TL-X | Unknown</button>
 </div>
 </div>
 
 <div class="drawer">
 <div class="drawer-title" onclick="toggleDrawer(this)">Axis II: Behavioral Class</div>
 <div class="drawer-content">
-<button onclick="showCategory('fusion_entities')">Fusion</button>
-<button onclick="showCategory('corrupted_forms')">Corrupted</button>
+<button onclick="showCategory('territorial_entities')">BC-T | Territorial</button>
+<button onclick="showCategory('brute_entities')">BC-B | Brute</button>
+<button onclick="showCategory('sleek_entities')">BC-S | Sleek</button>
+<button onclick="showCategory('observant_entities')">BC-O | Observant</button>
+<button onclick="showCategory('ambulatory_entities')">BC-A | Ambulatory</button>
+<button onclick="showCategory('ritualistic_entities')">BC-R | Ritualistic</button>
+<button onclick="showCategory('parasitic_entities')">BC-P | Parasitic</button>
+<button onclick="showCategory('intelligent_entities')">BC-I | Intelligent</button>
+<button onclick="showCategory('lurking_entities')">BC-L | Lurking</button>
+<button onclick="showCategory('mimetic_entities')">BC-M | Mimetic</button>
+<button onclick="showCategory('hunter_entities')">BC-H | Hunter</button>
+<button onclick="showCategory('collective_entities')">BC-C | Collective</button>
+<button onclick="showCategory('dormant_entities')">BC-D | Dormant</button>
+<button onclick="showCategory('unstable_entities')">BC-U | Unstable</button>
 </div>
 </div>
 
 <div class="drawer">
 <div class="drawer-title" onclick="toggleDrawer(this)">Axis III: Interaction Profile</div>
 <div class="drawer-content">
-<button onclick="showCategory('spectral')">Spectral</button>
-<button onclick="showCategory('dimensional')">Dimensional</button>
+<button onclick="showCategory('avoidant')">IP-AV | Avoidant</button>
+<button onclick="showCategory('neutral')">IP-NE | Neutral</button>
+<button onclick="showCategory('reactive')">IP-RE | Reactive</button>
+<button onclick="showCategory('aggressive')">IP-AG | Aggressive</button>
+<button onclick="showCategory('manipulative')">IP-MA | Manipulative</button>
 </div>
 </div>
 
+    <div class="drawer">
+<div class="drawer-title" onclick="toggleDrawer(this)">Axis IV: Physical State</div>
+<div class="drawer-content">
+<button onclick="showCategory('corporeal')">PS-C | Corporeal</button>
+<button onclick="showCategory('semi-corporeal')">PS-S | Semi-Corporeal</button>
+<button onclick="showCategory('incorporeal')">PS-I  | Incorporeal</button>
+<button onclick="showCategory('metamorphic')">PS-M | Metamorphic</button>
+<button onclick="showCategory('unknown')">PS-U | Unknown</button>
+</div>
+</div>
+    
 </div>
 
 <!-- CONTENT -->
