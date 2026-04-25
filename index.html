@@ -8,7 +8,11 @@ body {
     margin: 0;
     background-color: #e8dcc0;
     font-family: monospace;
-    background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+
+    background-image: linear-gradient(
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px
+    );
     background-size: 100% 4px;
 }
 
@@ -28,7 +32,9 @@ h1 {
     margin: 0;
 }
 
-p { text-align: center; }
+p {
+    text-align: center;
+}
 
 /* LAYOUT */
 .layout {
@@ -44,6 +50,10 @@ p { text-align: center; }
     border-right: 2px solid #a5946a;
 }
 
+.sidebar h2 {
+    margin-top: 0;
+}
+
 #searchBar {
     width: 100%;
     padding: 8px;
@@ -54,6 +64,7 @@ p { text-align: center; }
 }
 
 .sidebar button {
+    display: block;
     width: 100%;
     margin: 6px 0;
     padding: 8px;
@@ -62,13 +73,31 @@ p { text-align: center; }
     cursor: pointer;
 }
 
+/* DRAWERS */
+.drawer {
+    margin-bottom: 10px;
+}
+
+.drawer-title {
+    background: #bda97a;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #a5946a;
+    font-weight: bold;
+}
+
+.drawer-content {
+    display: none;
+    padding-left: 10px;
+}
+
 /* CONTENT */
 .content {
     flex: 1;
     padding: 20px;
 }
 
-/* CATEGORY */
+/* CATEGORY GRID */
 .category {
     display: none;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
@@ -80,7 +109,7 @@ p { text-align: center; }
     display: grid;
 }
 
-/* FILE */
+/* FILE CARD */
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
@@ -88,19 +117,46 @@ p { text-align: center; }
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.25s ease;
 }
 
 .file:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     background: #cbb88a;
+    box-shadow: 12px 12px 0px #a5946a;
+}
+
+.file::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 14px;
+    width: 95px;
+    height: 20px;
+    background: #cbb88a;
+    border: 2px solid #a5946a;
+    border-bottom: none;
+}
+
+.file::after {
+    content: "CASE FILE";
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 10px;
+    opacity: 0.55;
 }
 
 .file img {
     width: 80%;
     display: block;
-    margin: 10px auto;
+    margin: 12px auto 0;
     border: 1px solid #a5946a;
+}
+
+/* HIDDEN */
+.hidden {
+    display: none !important;
 }
 
 /* VIEWER */
@@ -126,12 +182,25 @@ p { text-align: center; }
     overflow-y: auto;
     padding: 30px;
     border: 2px solid #999;
+    box-shadow: 10px 10px 0px #333;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 10px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+    cursor: pointer;
 }
 
 /* DOCUMENT STYLE */
 .document h1 {
     text-align: left;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
 }
 
 .stamp {
@@ -144,7 +213,9 @@ p { text-align: center; }
     margin-bottom: 15px;
 }
 
-.section { margin-top: 20px; }
+.section {
+    margin-top: 20px;
+}
 
 .label {
     font-weight: bold;
@@ -164,19 +235,6 @@ p { text-align: center; }
     color: black;
     padding: 2px 5px;
 }
-
-/* hidden */
-.hidden { display: none !important; }
-
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    padding: 10px;
-    background: #d9c89e;
-    border: 1px solid #a5946a;
-    cursor: pointer;
-}
 </style>
 </head>
 
@@ -191,23 +249,27 @@ p { text-align: center; }
 <div class="sidebar">
 <h2>DATABASE</h2>
 
-<input id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
+<p id="counter">TOTAL FILES: 2</p>
 
+<input type="text" id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
+
+<div class="drawer">
+<div class="drawer-title" onclick="toggleDrawer(this)">Axis I</div>
+<div class="drawer-content">
 <button onclick="showCategory('animal_predators')">Predators</button>
+</div>
+</div>
 
-<p id="counter">TOTAL FILES: 0</p>
 </div>
 
 <!-- CONTENT -->
 <div class="content">
 
-<!-- VIEWER -->
 <div id="viewer" class="viewer">
-    <div id="viewerContent" class="viewer-content document"></div>
-    <button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
+<div id="viewerContent" class="viewer-content document"></div>
+<button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
 </div>
 
-<!-- CATEGORY -->
 <div id="animal_predators" class="category active">
 
 <div class="file" onclick="openFile('file1')">
@@ -227,54 +289,27 @@ p { text-align: center; }
 </div>
 </div>
 
-<!-- SCRIPTS -->
-<script>
-function showCategory(id){
-document.querySelectorAll('.category').forEach(c=>c.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-function openFile(id){
-document.getElementById("viewerContent").innerHTML =
-document.getElementById(id).innerHTML;
-document.getElementById("viewer").classList.add("active");
-}
-
-function closeViewer(){
-document.getElementById("viewer").classList.remove("active");
-}
-
-function searchFiles(){
-let v = document.getElementById("searchBar").value.toLowerCase();
-document.querySelectorAll(".file").forEach(f=>{
-f.classList.toggle("hidden", !f.innerText.toLowerCase().includes(v));
-});
-}
-
-document.getElementById("counter").innerText =
-"TOTAL FILES: " + document.querySelectorAll(".file").length;
-</script>
-
 <!-- FILE DATA -->
 <div id="file1" class="hidden">
 <div class="stamp">TOP SECRET</div>
 <h1>SUBJECT-001</h1>
 <p><b>Codename:</b> Whisperwing</p>
+<p><b>Threat Level:</b> HIGH</p>
 <img src="Monster 1.png" class="doc-image">
 
 <div class="section">
 <p class="label">DESCRIPTION</p>
-<p>A winged entity...</p>
+<p>A winged entity observed near rural zones...</p>
 </div>
 
 <div class="section">
 <p class="label">BEHAVIOR</p>
-<p>Highly reactive to sound...</p>
+<p>Highly reactive to sound frequencies above 8kHz.</p>
 </div>
 
 <div class="section">
-<p class="label">NOTES</p>
-<p class="redacted">████████████████</p>
+<p class="label">RESTRICTED</p>
+<p class="redacted">██████████████</p>
 </div>
 </div>
 
@@ -282,8 +317,38 @@ document.getElementById("counter").innerText =
 <div class="stamp">TOP SECRET</div>
 <h1>SUBJECT-002</h1>
 <p><b>Codename:</b> Heartbeat</p>
+<p><b>Threat Level:</b> UNKNOWN</p>
 <img src="https://via.placeholder.com/300" class="doc-image">
 </div>
+
+<script>
+function showCategory(category) {
+document.querySelectorAll('.category').forEach(div => div.classList.remove('active'));
+document.getElementById(category).classList.add('active');
+}
+
+function searchFiles() {
+let input = document.getElementById("searchBar").value.toLowerCase();
+document.querySelectorAll(".file").forEach(file => {
+file.classList.toggle("hidden", !file.innerText.toLowerCase().includes(input));
+});
+}
+
+function toggleDrawer(el) {
+el.nextElementSibling.style.display =
+el.nextElementSibling.style.display === "block" ? "none" : "block";
+}
+
+function openFile(id) {
+document.getElementById("viewerContent").innerHTML =
+document.getElementById(id).innerHTML;
+document.getElementById("viewer").classList.add("active");
+}
+
+function closeViewer() {
+document.getElementById("viewer").classList.remove("active");
+}
+</script>
 
 </body>
 </html>
