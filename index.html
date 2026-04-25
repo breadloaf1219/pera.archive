@@ -64,8 +64,18 @@ a:hover {
 .content {
     flex: 1;
     padding: 20px;
+    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 }
 
+ #searchBar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    border: 2px solid #a5946a;
+    background: #f5ecd7;
+}
+    
 /* CATEGORY GRID */
 .category {
     display: grid;
@@ -76,29 +86,41 @@ a:hover {
 
 /* FILE CARDS */
 .file {
-    background-color: #d9c89e;
+    background: #d9c89e;
     border: 2px solid #a5946a;
     padding: 15px;
     position: relative;
     box-shadow: 4px 4px 0px #a5946a;
     transition: 0.2s;
+    overflow: hidden;
 }
 
 .file:hover {
-    transform: translateY(-5px) rotate(-1deg);
-    background-color: #cbb88a;
+    transform: translateY(-6px) rotate(-1deg);
+    background: #cbb88a;
 }
 
+/* folder tab */
 .file::before {
     content: "";
     position: absolute;
-    top: -10px;
-    left: 10px;
-    width: 60px;
-    height: 15px;
-    background-color: #cbb88a;
+    top: -12px;
+    left: 12px;
+    width: 80px;
+    height: 18px;
+    background: #cbb88a;
     border: 2px solid #a5946a;
     border-bottom: none;
+}
+
+/* label strip (makes it feel like a folder label) */
+.file::after {
+    content: "FILE";
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 10px;
+    opacity: 0.6;
 }
 
 .file img {
@@ -112,6 +134,11 @@ a:hover {
     display: block;
     color: black;
     text-decoration: none;
+}
+
+ .file:hover::before {
+    top: -14px;
+    transition: 0.2s;
 }
 </style>
 </head>
@@ -171,6 +198,22 @@ function showCategory(category) {
     document.getElementById(category).style.display = 'grid';
 }
 </script>
+    
+<script>
+function searchFiles() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let files = document.querySelectorAll(".file");
 
+    files.forEach(file => {
+        let text = file.innerText.toLowerCase();
+        if (text.includes(input)) {
+            file.style.display = "block";
+        } else {
+            file.style.display = "none";
+        }
+    });
+}
+</script>
+    
 </body>
 </html>
