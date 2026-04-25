@@ -198,6 +198,47 @@ p {
     border: 1px solid #a5946a;
     cursor: pointer;
 }
+
+    /* CLASSIFIED DOCUMENT STYLE */
+.document h1 {
+    text-align: left;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+}
+
+.stamp {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 3px solid red;
+    color: red;
+    font-weight: bold;
+    transform: rotate(-8deg);
+    margin-bottom: 15px;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.doc-image {
+    width: 60%;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #999;
+}
+
+.redacted {
+    background: black;
+    color: black;
+    padding: 2px 5px;
+}
+    
 </style>
 </head>
 
@@ -278,7 +319,7 @@ p {
 
 <!-- VIEWER -->
 <div id="viewer" class="viewer">
-    <div class="viewer-content" id="viewerContent"></div>
+<    div id="viewerContent" class="viewer-content document"></div>
     <button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
 </div>
 
@@ -371,5 +412,47 @@ updateCounter();
 <p>Threat Level: UNKNOWN</p>
 </div>
 
+    <div id="file1" class="hidden">
+    <div class="stamp">TOP SECRET</div>
+
+    <h1>SUBJECT-001</h1>
+
+    <p><b>Codename:</b> Whisperwing</p>
+    <p><b>Threat Level:</b> HIGH</p>
+
+    <img src="Monster 1.png" class="doc-image">
+
+    <div class="section">
+        <p class="label">DESCRIPTION</p>
+        <p>A winged entity observed near rural zones...</p>
+    </div>
+
+    <div class="section">
+        <p class="label">BEHAVIOR</p>
+        <p>Highly reactive to sound frequencies above 8kHz.</p>
+    </div>
+
+    <div class="section">
+        <p class="label">RESTRICTED NOTES</p>
+        <p class="redacted">████████████████████████</p>
+    </div>
+</div>
+
+    <div id="file2" class="hidden">
+    <div class="stamp">TOP SECRET</div>
+
+    <h1>SUBJECT-002</h1>
+
+    <p><b>Codename:</b> Heartbeat</p>
+    <p><b>Threat Level:</b> UNKNOWN</p>
+
+    <img src="https://via.placeholder.com/300" class="doc-image">
+
+    <div class="section">
+        <p class="label">DESCRIPTION</p>
+        <p>Unknown biological rhythm detected in abandoned structures.</p>
+    </div>
+</div>
+    
 </body>
 </html>
