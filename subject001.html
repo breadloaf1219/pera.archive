@@ -1,87 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SUBJECT-001 FILE</title>
+<title>CASE FILE</title>
 
-    <style>
-        body {
-            background-color: #e8dcc0;
-            color: #1a1a1a;
-            font-family: monospace;
-            padding: 40px;
-        }
+<style>
+body {
+    background-color: #dcd6c3;
+    font-family: monospace;
+}
 
-        .document {
-            background-color: #f5ecd7;
-            padding: 30px;
-            border: 2px solid #b5a474;
-            max-width: 700px;
-            margin: auto;
-            box-shadow: 6px 6px 0px #b5a474;
-        }
+.document {
+    background-color: #f5ecd7;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 2px solid #999;
+    box-shadow: 8px 8px 0px #aaa;
+}
 
-        h1 {
-            text-align: center;
-            border-bottom: 2px solid black;
-            padding-bottom: 10px;
-        }
+.header {
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
 
-        .stamp {
-            color: red;
-            font-weight: bold;
-            border: 2px solid red;
-            display: inline-block;
-            padding: 5px 10px;
-            transform: rotate(-10deg);
-            margin-bottom: 20px;
-        }
+.stamp {
+    color: red;
+    border: 3px solid red;
+    display: inline-block;
+    padding: 5px 15px;
+    transform: rotate(-8deg);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        .section {
-            margin-top: 20px;
-        }
+.section {
+    margin-top: 20px;
+}
 
-        .label {
-            font-weight: bold;
-        }
+.label {
+    font-weight: bold;
+}
 
-    </style>
+.doc-image {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #999;
+}
+
+.redacted {
+    background-color: black;
+    color: black;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="document">
 
-    <div class="stamp">CLASSIFIED</div>
+<div class="stamp">TOP SECRET</div>
 
-    <h1>SUBJECT-001</h1>
+<div class="header">
+<h1>SUBJECT-001</h1>
+<p>Codename: Whisperwing</p>
+<p>Threat Level: HIGH</p>
+<p>Status: ACTIVE</p>
+</div>
 
-    <p><span class="label">Codename:</span> Whisperwing</p>
-    <p><span class="label">Threat Level:</span> HIGH</p>
-    <p><span class="label">Status:</span> Active</p>
+<img src="monster1.png" class="doc-image">
 
-    <div class="section">
-        <p class="label">Description:</p>
-        <p>
-        This entity resembles a butterfly-like organism with no visible facial features...
-        </p>
-    </div>
+<div class="section">
+<p class="label">Description:</p>
+<p>Write your monster description here...</p>
+</div>
 
-    <div class="section">
-        <p class="label">Behavior:</p>
-        <p>
-        Subject appears to track heartbeats through airborne vibrations...
-        </p>
-    </div>
+<div class="section">
+<p class="label">Behavior:</p>
+<p>Write behavior here...</p>
+</div>
 
-    <div class="section">
-        <p class="label">Notes:</p>
-        <p>
-        ███████████████████████████████████
-        </p>
-    </div>
+<div class="section">
+<p class="label">Notes:</p>
+<p class="redacted">████████████████████</p>
+</div>
 
-    <br>
-    <a href="index.html">← Return to Database</a>
+<a href="index.html">← Return</a>
 
 </div>
 
