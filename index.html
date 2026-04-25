@@ -8,20 +8,6 @@ body {
     margin: 0;
     background-color: #e8dcc0;
     font-family: monospace;
-
-    background-image: linear-gradient(
-        rgba(0,0,0,0.02) 1px,
-        transparent 1px
-    );
-    background-size: 100% 4px;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(rgba(0,0,0,0.03), transparent 70%);
-    pointer-events: none;
 }
 
 /* HEADER */
@@ -32,15 +18,7 @@ h1 {
     margin: 0;
 }
 
-p {
-    text-align: center;
-}
-
-/* REMOVE BLUE LINKS */
-a {
-    color: inherit;
-    text-decoration: none;
-}
+p { text-align: center; }
 
 /* LAYOUT */
 .layout {
@@ -50,7 +28,7 @@ a {
 
 /* SIDEBAR */
 .sidebar {
-    width: 220px;
+    width: 240px;
     background-color: #cbb88a;
     padding: 20px;
     border-right: 2px solid #a5946a;
@@ -59,10 +37,15 @@ a {
 #searchBar {
     width: 100%;
     padding: 8px;
-    margin: 10px 0 20px 0;
+    margin: 10px 0;
     border: 2px solid #a5946a;
     background: #f5ecd7;
-    box-sizing: border-box;
+}
+
+/* FILE COUNTER */
+#counter {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 /* DRAWERS */
@@ -81,6 +64,15 @@ a {
 .drawer-content {
     display: none;
     padding-left: 10px;
+}
+
+.drawer-content button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 6px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+    cursor: pointer;
 }
 
 /* CONTENT */
@@ -103,53 +95,24 @@ a {
 
 /* FILE CARD */
 .file {
-    display: block;
     background: #d9c89e;
     border: 2px solid #a5946a;
     padding: 18px;
-    position: relative;
-    box-shadow: 6px 6px 0px #a5946a;
     cursor: pointer;
-    transition: 0.25s ease;
+    box-shadow: 6px 6px 0px #a5946a;
+    transition: 0.2s;
 }
 
 .file:hover {
-    transform: translateY(-8px);
-    background: #cbb88a;
-    box-shadow: 12px 12px 0px #a5946a;
+    transform: translateY(-6px);
 }
 
-.file::before {
-    content: "";
-    position: absolute;
-    top: -14px;
-    left: 14px;
-    width: 95px;
-    height: 20px;
-    background: #cbb88a;
-    border: 2px solid #a5946a;
-    border-bottom: none;
-}
-
-.file::after {
-    content: "CASE FILE";
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    font-size: 10px;
-    opacity: 0.55;
-}
-
+/* IMAGE */
 .file img {
     width: 80%;
     display: block;
-    margin: 12px auto 0;
+    margin: 10px auto;
     border: 1px solid #a5946a;
-}
-
-/* HIDDEN */
-.hidden {
-    display: none !important;
 }
 
 /* VIEWER */
@@ -160,7 +123,6 @@ a {
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .viewer.active {
@@ -170,31 +132,19 @@ a {
 .viewer-content {
     background: #f5ecd7;
     width: 80%;
-    max-width: 900px;
-    max-height: 90%;
-    overflow-y: auto;
-    padding: 30px;
-    border: 2px solid #999;
-    box-shadow: 10px 10px 0px #333;
+    max-width: 800px;
+    padding: 20px;
     position: relative;
 }
 
-/* CLOSE BUTTON ALWAYS ABOVE */
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 10px;
+    padding: 8px;
     background: #d9c89e;
     border: 1px solid #a5946a;
     cursor: pointer;
-    z-index: 1001;
-}
-
-/* DOCUMENT */
-.document h1 {
-    text-align: left;
-    border-bottom: 2px solid #000;
 }
 </style>
 </head>
@@ -208,9 +158,11 @@ a {
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-<h2>DATABASE</h2>
 
-<input type="text" id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
+<h2>DATABASE</h2>
+<div id="counter">TOTAL FILES: 0</div>
+
+<input type="text" id="searchBar" placeholder="Search..." onkeyup="searchFiles()">
 
 <div class="drawer"> 
 <div class="drawer-title" onclick="toggleDrawer(this)">Axis I: Threat Level</div> 
@@ -272,8 +224,8 @@ a {
 <div class="content">
 
 <div id="viewer" class="viewer">
-<div id="viewerContent" class="viewer-content document"></div>
-<button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
+<div class="viewer-content" id="viewerContent"></div>
+<button class="close-btn" onclick="closeViewer()">CLOSE</button>
 </div>
 
 <div id="animal_predators" class="category active">
@@ -300,44 +252,47 @@ a {
 <!-- FILE DATA -->
 <div id="file1" class="hidden">
 <h1>SUBJECT-001</h1>
-<p><b>Codename:</b> Whisperwing</p>
-<p><b>Threat Level:</b> HIGH</p>
-<p>Description goes here...</p>
+<p>Whisperwing details...</p>
 </div>
 
 <div id="file2" class="hidden">
 <h1>SUBJECT-002</h1>
-<p><b>Codename:</b> Heartbeat</p>
-<p><b>Threat Level:</b> UNKNOWN</p>
+<p>Heartbeat details...</p>
 </div>
 
 <script>
-function showCategory(category) {
-document.querySelectorAll('.category').forEach(div => div.classList.remove('active'));
-document.getElementById(category).classList.add('active');
+function showCategory(cat){
+document.querySelectorAll('.category').forEach(c=>c.classList.remove('active'));
+document.getElementById(cat).classList.add('active');
 }
 
-function searchFiles() {
-let input = document.getElementById("searchBar").value.toLowerCase();
-document.querySelectorAll(".file").forEach(file => {
-file.classList.toggle("hidden", !file.innerText.toLowerCase().includes(input));
+function searchFiles(){
+let input=document.getElementById("searchBar").value.toLowerCase();
+document.querySelectorAll(".file").forEach(f=>{
+f.style.display = f.innerText.toLowerCase().includes(input) ? "block":"none";
 });
 }
 
-function toggleDrawer(el) {
-el.nextElementSibling.style.display =
-el.nextElementSibling.style.display === "block" ? "none" : "block";
+function toggleDrawer(el){
+let c=el.nextElementSibling;
+c.style.display = c.style.display==="block"?"none":"block";
 }
 
-function openFile(id) {
+function openFile(id){
 document.getElementById("viewerContent").innerHTML =
 document.getElementById(id).innerHTML;
 document.getElementById("viewer").classList.add("active");
 }
 
-function closeViewer() {
+function closeViewer(){
 document.getElementById("viewer").classList.remove("active");
 }
+
+function updateCounter(){
+document.getElementById("counter").innerText =
+"TOTAL FILES: " + document.querySelectorAll(".file").length;
+}
+updateCounter();
 </script>
 
 </body>
