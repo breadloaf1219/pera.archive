@@ -96,6 +96,18 @@ p {
 .category.active {
     display: grid;
 }
+    <div id="animal_predators" class="category active"></div>
+<div id="animal_passive" class="category"></div>
+<div id="animal_unknown" class="category"></div>
+
+<div id="fusion_entities" class="category"></div>
+<div id="corrupted_forms" class="category"></div>
+
+<div id="spectral" class="category"></div>
+<div id="dimensional" class="category"></div>
+
+<div id="unknown" class="category"></div>
+<div id="anomalies" class="category"></div>
 
 /* FILE (folder card) */
 .file {
@@ -160,26 +172,77 @@ p {
 .hidden {
     display: none !important;
 }
+    .drawer {
+    margin-bottom: 10px;
+}
+
+.drawer-title {
+    background: #bda97a;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #a5946a;
+    font-weight: bold;
+}
+
+.drawer-content {
+    display: none;
+    padding-left: 10px;
+}
+
+.drawer-content button {
+    margin: 5px 0;
+}
 </style>
 </head>
 
 <body>
 
-<h1>PARANORMAL ENTITY DATABASE</h1>
+<h1>PARANORMAL RESEARCH ARCHIVE</h1>
 <p>WARNING: Unauthorized access will be logged.</p>
 
 <div class="layout">
 
     <div class="sidebar">
-        <h2>DATABASE</h2>
+    <h2>DATABASE</h2>
 
-        <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
+    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
-        <button onclick="showCategory('animals')">Animal-like</button>
-        <button onclick="showCategory('amalgamations')">Amalgamations</button>
-        <button onclick="showCategory('supernatural')">Supernatural</button>
-        <button onclick="showCategory('other')">Other</button>
+    <!-- CATEGORY SYSTEM -->
+
+    <div class="drawer">
+        <div class="drawer-title" onclick="toggleDrawer(this)">BIOLOGICAL</div>
+        <div class="drawer-content">
+            <button onclick="showCategory('animal_predators')">Predatory Types</button>
+            <button onclick="showCategory('animal_passive')">Passive Types</button>
+            <button onclick="showCategory('animal_unknown')">Unclassified Biology</button>
+        </div>
     </div>
+
+    <div class="drawer">
+        <div class="drawer-title" onclick="toggleDrawer(this)">AMALGAMATIONS</div>
+        <div class="drawer-content">
+            <button onclick="showCategory('fusion_entities')">Fusion Entities</button>
+            <button onclick="showCategory('corrupted_forms')">Corrupted Forms</button>
+        </div>
+    </div>
+
+    <div class="drawer">
+        <div class="drawer-title" onclick="toggleDrawer(this)">SUPERNATURAL</div>
+        <div class="drawer-content">
+            <button onclick="showCategory('spectral')">Spectral</button>
+            <button onclick="showCategory('dimensional')">Dimensional</button>
+        </div>
+    </div>
+
+    <div class="drawer">
+        <div class="drawer-title" onclick="toggleDrawer(this)">OTHER</div>
+        <div class="drawer-content">
+            <button onclick="showCategory('unknown')">Unknown</button>
+            <button onclick="showCategory('anomalies')">Anomalies</button>
+        </div>
+    </div>
+
+</div>
 
     <div class="content">
 
@@ -234,6 +297,13 @@ function searchFiles() {
     });
 }
 </script>
-
+    
+<script>
+function toggleDrawer(element) {
+    let content = element.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+}
+</script>
+    
 </body>
 </html>
