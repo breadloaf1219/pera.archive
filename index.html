@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>P.E.R.A. Archive</title>
-    <style>
-        body {
+<title>P.E.R.A. Archive</title>
+
+<style>
+body {
     margin: 0;
     background-color: #e8dcc0;
     font-family: monospace;
-    padding: 20px;
-            a {
+}
+
+/* HEADER */
+h1 {
+    text-align: center;
+    border-bottom: 2px solid #1a1a1a;
+    padding: 10px;
+    margin: 0;
+}
+
+p {
+    text-align: center;
+}
+
+/* LINKS */
+a {
     color: #1a1a1a;
     text-decoration: none;
 }
@@ -20,54 +35,14 @@ a:visited {
 a:hover {
     text-decoration: underline;
 }
-            h1 {
-    text-align: center;
-    border-bottom: 2px solid #1a1a1a;
-    padding-bottom: 10px;
-}
-        h1 {
-            text-align: center;
-        }
-        .file {
-            border: 1px solid #00ff9f;
-            padding: 10px;
-            margin: 10px 0;
-        }
-            .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
-    justify-content: center;
-    gap: 30px;
-}
 
-.file {
-    background-color: #d9c89e; /* folder color */
-    border: 2px solid #b5a474;
-    padding: 15px;
-    text-align: center;
-    max-width: 300px;
-    box-shadow: 4px 4px 0px #b5a474;
-}
-             img {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-}
-            .file:hover {
-    background-color: #cbb88a; /* slightly darker folder color */
-    transform: translateY(-5px);
-    transition: 0.2s;
-}
-            .file a {
-    display: block;
-}
-            }
-
-        .layout {
+/* LAYOUT */
+.layout {
     display: flex;
     min-height: 100vh;
 }
 
+/* SIDEBAR */
 .sidebar {
     width: 200px;
     background-color: #cbb88a;
@@ -85,11 +60,13 @@ a:hover {
     cursor: pointer;
 }
 
+/* CONTENT AREA */
 .content {
     flex: 1;
     padding: 20px;
 }
 
+/* CATEGORY GRID */
 .category {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
@@ -97,6 +74,7 @@ a:hover {
     gap: 20px;
 }
 
+/* FILE CARDS */
 .file {
     background-color: #d9c89e;
     border: 2px solid #a5946a;
@@ -106,7 +84,12 @@ a:hover {
     transition: 0.2s;
 }
 
-        .file::before {
+.file:hover {
+    transform: translateY(-5px) rotate(-1deg);
+    background-color: #cbb88a;
+}
+
+.file::before {
     content: "";
     position: absolute;
     top: -10px;
@@ -118,9 +101,11 @@ a:hover {
     border-bottom: none;
 }
 
-.file:hover {
-    transform: translateY(-5px) rotate(-1deg);
-    background-color: #cbb88a;
+.file img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #a5946a;
 }
 
 .file a {
@@ -128,35 +113,17 @@ a:hover {
     color: black;
     text-decoration: none;
 }
-
-        .file img {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border: 1px solid #a5946a;
-}
-        
-    </style>
+</style>
 </head>
 
-    <script>
-function showCategory(category) {
-    document.querySelectorAll('.category').forEach(div => {
-        div.style.display = 'none';
-    });
-    document.getElementById(category).style.display = 'grid';
-}
-</script>
-    
 <body>
 
 <h1>PARANORMAL ENTITY RESEARCH AGENCY DATABASE</h1>
 <p>WARNING: Unauthorized access will be logged.</p>
 
-<div class="container">
+<div class="layout">
 
-   <div class="layout">
-
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <h2>DATABASE</h2>
         <button onclick="showCategory('animals')">Animal-like</button>
@@ -165,6 +132,7 @@ function showCategory(category) {
         <button onclick="showCategory('other')">Other</button>
     </div>
 
+    <!-- CONTENT -->
     <div class="content">
 
         <div id="animals" class="category">
@@ -177,6 +145,14 @@ function showCategory(category) {
                 </a>
             </div>
 
+            <div class="file">
+                <a href="subject002.html">
+                    <h3>SUBJECT-002</h3>
+                    <p>Heartbeat</p>
+                    <img src="https://via.placeholder.com/200">
+                </a>
+            </div>
+
         </div>
 
         <div id="amalgamations" class="category" style="display:none;"></div>
@@ -185,12 +161,16 @@ function showCategory(category) {
 
     </div>
 
-    <div class="file">
-        <a href="subject002.html">
-            <h2>SUBJECT-002</h2>
-            <p>Codename: "Heartbeat"</p>
-            <img src="https://via.placeholder.com/200">
-        </a>
-    </div>
-
 </div>
+
+<script>
+function showCategory(category) {
+    document.querySelectorAll('.category').forEach(div => {
+        div.style.display = 'none';
+    });
+    document.getElementById(category).style.display = 'grid';
+}
+</script>
+
+</body>
+</html>
