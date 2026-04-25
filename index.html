@@ -196,6 +196,20 @@ a {
     color: black;
     padding: 2px 5px;
 }
+
+    .back-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.back-btn:hover {
+    background: #cbb88a;
+}
 </style>
 </head>
 
@@ -261,6 +275,19 @@ file.classList.toggle("hidden", !file.innerText.toLowerCase().includes(input));
 function toggleDrawer(el) {
 el.nextElementSibling.style.display =
 el.nextElementSibling.style.display === "block" ? "none" : "block";
+}
+
+    function openFile(id) {
+let content = document.getElementById(id).innerHTML;
+
+document.getElementById("viewerContent").innerHTML =
+'<div class="back-btn" onclick="closeViewer()">← BACK TO ARCHIVE</div>' + content;
+
+document.getElementById("viewer").classList.add("active");
+}
+
+function closeViewer() {
+document.getElementById("viewer").classList.remove("active");
 }
 </script>
 
