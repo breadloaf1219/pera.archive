@@ -9,28 +9,21 @@ body {
     background-color: #e8dcc0;
     font-family: monospace;
 
-    /* subtle paper grain effect */
     background-image: linear-gradient(
         rgba(0,0,0,0.02) 1px,
         transparent 1px
     );
     background-size: 100% 4px;
 }
-    
+
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        rgba(0,0,0,0.03),
-        transparent 70%
-    );
+    inset: 0;
+    background: radial-gradient(rgba(0,0,0,0.03), transparent 70%);
     pointer-events: none;
 }
-    
+
 /* HEADER */
 h1 {
     text-align: center;
@@ -43,23 +36,6 @@ p {
     text-align: center;
 }
 
-/* SEARCH */
-#searchBar {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0 15px 0;
-    font-family: monospace;
-    border: 2px solid #a5946a;
-    background: #f5ecd7;
-    box-sizing: border-box;
-}
-
-/* LINKS */
-a {
-    color: #1a1a1a;
-    text-decoration: none;
-}
-
 /* LAYOUT */
 .layout {
     display: flex;
@@ -68,20 +44,39 @@ a {
 
 /* SIDEBAR */
 .sidebar {
-    width: 200px;
+    width: 220px;
     background-color: #cbb88a;
     padding: 20px;
     border-right: 2px solid #a5946a;
 }
 
+.sidebar h2 {
+    margin-top: 0;
+}
+
+#searchBar {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0 20px 0;
+    border: 2px solid #a5946a;
+    background: #f5ecd7;
+    box-sizing: border-box;
+}
+
+/* Sidebar buttons */
 .sidebar button {
     display: block;
     width: 100%;
-    margin: 10px 0;
+    margin: 8px 0;
     padding: 10px;
     background-color: #d9c89e;
     border: 1px solid #a5946a;
     cursor: pointer;
+    transition: 0.15s;
+}
+
+.sidebar button:hover {
+    background-color: #cbb88a;
 }
 
 /* CONTENT */
@@ -92,13 +87,17 @@ a {
 
 /* CATEGORY GRID */
 .category {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
     justify-content: center;
     gap: 20px;
 }
 
-/* FILE CARD (folder style) */
+.category.active {
+    display: grid;
+}
+
+/* FILE (folder card) */
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
@@ -106,17 +105,17 @@ a {
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
     transition: 0.25s ease;
-    overflow: visible;
+    cursor: pointer;
 }
 
-/* hover feels like folder lifting */
+/* hover */
 .file:hover {
     transform: translateY(-8px) rotate(-0.5deg);
     background: #cbb88a;
     box-shadow: 12px 12px 0px #a5946a;
 }
 
-/* folder tab (stronger + connected feel) */
+/* folder tab */
 .file::before {
     content: "";
     position: absolute;
@@ -129,7 +128,7 @@ a {
     border-bottom: none;
 }
 
-/* label strip */
+/* label */
 .file::after {
     content: "CASE FILE";
     position: absolute;
@@ -139,29 +138,25 @@ a {
     opacity: 0.55;
 }
 
-
 /* IMAGE */
 .file img {
     width: 80%;
-    height: auto;
-    margin-top: 12px;
-    border: 1px solid #a5946a;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 12px auto 0 auto;
+    border: 1px solid #a5946a;
 }
-    
+
+/* click feel */
 .file:active {
     transform: translateY(-2px) scale(0.99);
 }
 
 .file a {
-    display: block;
-    color: black;
     text-decoration: none;
+    color: black;
 }
-    
-/* SEARCH HIDE FIX */
+
+/* hidden for search */
 .hidden {
     display: none !important;
 }
@@ -175,22 +170,20 @@ a {
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
-    <h2>DATABASE</h2>
+        <h2>DATABASE</h2>
 
-    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
+        <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
-    <button onclick="showCategory('animals')">Animal-like</button>
-    <button onclick="showCategory('amalgamations')">Amalgamations</button>
-    <button onclick="showCategory('supernatural')">Supernatural</button>
-    <button onclick="showCategory('other')">Other</button>
-</div>
+        <button onclick="showCategory('animals')">Animal-like</button>
+        <button onclick="showCategory('amalgamations')">Amalgamations</button>
+        <button onclick="showCategory('supernatural')">Supernatural</button>
+        <button onclick="showCategory('other')">Other</button>
+    </div>
 
-    <!-- CONTENT -->
     <div class="content">
 
-        <div id="animals" class="category">
+        <div id="animals" class="category active">
 
             <div class="file">
                 <a href="subject001.html">
@@ -210,9 +203,9 @@ a {
 
         </div>
 
-        <div id="amalgamations" class="category" style="display:none;"></div>
-        <div id="supernatural" class="category" style="display:none;"></div>
-        <div id="other" class="category" style="display:none;"></div>
+        <div id="amalgamations" class="category"></div>
+        <div id="supernatural" class="category"></div>
+        <div id="other" class="category"></div>
 
     </div>
 
@@ -221,9 +214,9 @@ a {
 <script>
 function showCategory(category) {
     document.querySelectorAll('.category').forEach(div => {
-        div.style.display = 'none';
+        div.classList.remove('active');
     });
-    document.getElementById(category).style.display = 'grid';
+    document.getElementById(category).classList.add('active');
 }
 
 function searchFiles() {
