@@ -63,20 +63,36 @@ p {
     box-sizing: border-box;
 }
 
-/* Sidebar buttons */
 .sidebar button {
     display: block;
     width: 100%;
-    margin: 8px 0;
-    padding: 10px;
+    margin: 6px 0;
+    padding: 8px;
     background-color: #d9c89e;
     border: 1px solid #a5946a;
     cursor: pointer;
-    transition: 0.15s;
 }
 
 .sidebar button:hover {
     background-color: #cbb88a;
+}
+
+/* DRAWERS */
+.drawer {
+    margin-bottom: 10px;
+}
+
+.drawer-title {
+    background: #bda97a;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #a5946a;
+    font-weight: bold;
+}
+
+.drawer-content {
+    display: none;
+    padding-left: 10px;
 }
 
 /* CONTENT */
@@ -96,20 +112,8 @@ p {
 .category.active {
     display: grid;
 }
-    <div id="animal_predators" class="category active"></div>
-<div id="animal_passive" class="category"></div>
-<div id="animal_unknown" class="category"></div>
 
-<div id="fusion_entities" class="category"></div>
-<div id="corrupted_forms" class="category"></div>
-
-<div id="spectral" class="category"></div>
-<div id="dimensional" class="category"></div>
-
-<div id="unknown" class="category"></div>
-<div id="anomalies" class="category"></div>
-
-/* FILE (folder card) */
+/* FILE */
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
@@ -117,17 +121,14 @@ p {
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
     transition: 0.25s ease;
-    cursor: pointer;
 }
 
-/* hover */
 .file:hover {
-    transform: translateY(-8px) rotate(-0.5deg);
+    transform: translateY(-8px);
     background: #cbb88a;
     box-shadow: 12px 12px 0px #a5946a;
 }
 
-/* folder tab */
 .file::before {
     content: "";
     position: absolute;
@@ -140,7 +141,6 @@ p {
     border-bottom: none;
 }
 
-/* label */
 .file::after {
     content: "CASE FILE";
     position: absolute;
@@ -150,7 +150,6 @@ p {
     opacity: 0.55;
 }
 
-/* IMAGE */
 .file img {
     width: 80%;
     display: block;
@@ -158,39 +157,14 @@ p {
     border: 1px solid #a5946a;
 }
 
-/* click feel */
-.file:active {
-    transform: translateY(-2px) scale(0.99);
-}
-
 .file a {
     text-decoration: none;
     color: black;
 }
 
-/* hidden for search */
+/* hidden */
 .hidden {
     display: none !important;
-}
-    .drawer {
-    margin-bottom: 10px;
-}
-
-.drawer-title {
-    background: #bda97a;
-    padding: 10px;
-    cursor: pointer;
-    border: 1px solid #a5946a;
-    font-weight: bold;
-}
-
-.drawer-content {
-    display: none;
-    padding-left: 10px;
-}
-
-.drawer-content button {
-    margin: 5px 0;
 }
 </style>
 </head>
@@ -202,108 +176,100 @@ p {
 
 <div class="layout">
 
-    <div class="sidebar">
-    <h2>DATABASE</h2>
+<div class="sidebar">
+<h2>DATABASE</h2>
 
-    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
+<input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
-    <!-- CATEGORY SYSTEM -->
+<div class="drawer">
+<div class="drawer-title" onclick="toggleDrawer(this)">BIOLOGICAL</div>
+<div class="drawer-content">
+<button onclick="showCategory('animal_predators')">Predatory</button>
+<button onclick="showCategory('animal_passive')">Passive</button>
+</div>
+</div>
 
-    <div class="drawer">
-        <div class="drawer-title" onclick="toggleDrawer(this)">BIOLOGICAL</div>
-        <div class="drawer-content">
-            <button onclick="showCategory('animal_predators')">Predatory Types</button>
-            <button onclick="showCategory('animal_passive')">Passive Types</button>
-            <button onclick="showCategory('animal_unknown')">Unclassified Biology</button>
-        </div>
-    </div>
+<div class="drawer">
+<div class="drawer-title" onclick="toggleDrawer(this)">AMALGAMATIONS</div>
+<div class="drawer-content">
+<button onclick="showCategory('fusion_entities')">Fusion</button>
+<button onclick="showCategory('corrupted_forms')">Corrupted</button>
+</div>
+</div>
 
-    <div class="drawer">
-        <div class="drawer-title" onclick="toggleDrawer(this)">AMALGAMATIONS</div>
-        <div class="drawer-content">
-            <button onclick="showCategory('fusion_entities')">Fusion Entities</button>
-            <button onclick="showCategory('corrupted_forms')">Corrupted Forms</button>
-        </div>
-    </div>
-
-    <div class="drawer">
-        <div class="drawer-title" onclick="toggleDrawer(this)">SUPERNATURAL</div>
-        <div class="drawer-content">
-            <button onclick="showCategory('spectral')">Spectral</button>
-            <button onclick="showCategory('dimensional')">Dimensional</button>
-        </div>
-    </div>
-
-    <div class="drawer">
-        <div class="drawer-title" onclick="toggleDrawer(this)">OTHER</div>
-        <div class="drawer-content">
-            <button onclick="showCategory('unknown')">Unknown</button>
-            <button onclick="showCategory('anomalies')">Anomalies</button>
-        </div>
-    </div>
+<div class="drawer">
+<div class="drawer-title" onclick="toggleDrawer(this)">SUPERNATURAL</div>
+<div class="drawer-content">
+<button onclick="showCategory('spectral')">Spectral</button>
+<button onclick="showCategory('dimensional')">Dimensional</button>
+</div>
+</div>
 
 </div>
 
-    <div class="content">
+<div class="content">
 
-        <div id="animals" class="category active">
+<!-- BIOLOGICAL -->
+<div id="animal_predators" class="category active">
 
-            <div class="file">
-                <a href="subject001.html">
-                    <h3>SUBJECT-001</h3>
-                    <p>Whisperwing</p>
-                    <img src="Monster 1.png">
-                </a>
-            </div>
+<div class="file">
+<a href="subject001.html">
+<h3>SUBJECT-001</h3>
+<p>Whisperwing</p>
+<img src="Monster 1.png">
+</a>
+</div>
 
-            <div class="file">
-                <a href="subject002.html">
-                    <h3>SUBJECT-002</h3>
-                    <p>Heartbeat</p>
-                    <img src="https://via.placeholder.com/200">
-                </a>
-            </div>
+<div class="file">
+<a href="subject002.html">
+<h3>SUBJECT-002</h3>
+<p>Heartbeat</p>
+<img src="https://via.placeholder.com/200">
+</a>
+</div>
 
-        </div>
+</div>
 
-        <div id="amalgamations" class="category"></div>
-        <div id="supernatural" class="category"></div>
-        <div id="other" class="category"></div>
+<div id="animal_passive" class="category"></div>
 
-    </div>
+<!-- OTHER CATEGORIES -->
+<div id="fusion_entities" class="category"></div>
+<div id="corrupted_forms" class="category"></div>
+<div id="spectral" class="category"></div>
+<div id="dimensional" class="category"></div>
+
+</div>
 
 </div>
 
 <script>
 function showCategory(category) {
-    document.querySelectorAll('.category').forEach(div => {
-        div.classList.remove('active');
-    });
-    document.getElementById(category).classList.add('active');
+document.querySelectorAll('.category').forEach(div => {
+div.classList.remove('active');
+});
+document.getElementById(category).classList.add('active');
 }
 
 function searchFiles() {
-    let input = document.getElementById("searchBar").value.toLowerCase();
-    let files = document.querySelectorAll(".file");
+let input = document.getElementById("searchBar").value.toLowerCase();
+let files = document.querySelectorAll(".file");
 
-    files.forEach(file => {
-        let text = file.innerText.toLowerCase();
+files.forEach(file => {
+let text = file.innerText.toLowerCase();
 
-        if (text.includes(input)) {
-            file.classList.remove("hidden");
-        } else {
-            file.classList.add("hidden");
-        }
-    });
+if (text.includes(input)) {
+file.classList.remove("hidden");
+} else {
+file.classList.add("hidden");
 }
-</script>
-    
-<script>
+});
+}
+
 function toggleDrawer(element) {
-    let content = element.nextElementSibling;
-    content.style.display = content.style.display === "block" ? "none" : "block";
+let content = element.nextElementSibling;
+content.style.display = content.style.display === "block" ? "none" : "block";
 }
 </script>
-    
+
 </body>
 </html>
