@@ -22,18 +22,20 @@ p {
     text-align: center;
 }
 
+/* SEARCH */
+#searchBar {
+    width: calc(100% - 40px);
+    margin: 10px 20px;
+    padding: 10px;
+    font-family: monospace;
+    border: 2px solid #a5946a;
+    background: #f5ecd7;
+}
+
 /* LINKS */
 a {
     color: #1a1a1a;
     text-decoration: none;
-}
-
-a:visited {
-    color: #1a1a1a;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 /* LAYOUT */
@@ -60,22 +62,12 @@ a:hover {
     cursor: pointer;
 }
 
-/* CONTENT AREA */
+/* CONTENT */
 .content {
     flex: 1;
     padding: 20px;
-    <input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 }
 
- #searchBar {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-family: monospace;
-    border: 2px solid #a5946a;
-    background: #f5ecd7;
-}
-    
 /* CATEGORY GRID */
 .category {
     display: grid;
@@ -84,7 +76,7 @@ a:hover {
     gap: 20px;
 }
 
-/* FILE CARDS */
+/* FILE CARD (folder style) */
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
@@ -113,7 +105,6 @@ a:hover {
     border-bottom: none;
 }
 
-/* label strip (makes it feel like a folder label) */
 .file::after {
     content: "FILE";
     position: absolute;
@@ -123,6 +114,7 @@ a:hover {
     opacity: 0.6;
 }
 
+/* IMAGE */
 .file img {
     width: 100%;
     height: auto;
@@ -130,15 +122,9 @@ a:hover {
     border: 1px solid #a5946a;
 }
 
-.file a {
-    display: block;
-    color: black;
-    text-decoration: none;
-}
-
- .file:hover::before {
-    top: -14px;
-    transition: 0.2s;
+/* SEARCH HIDE FIX */
+.hidden {
+    display: none !important;
 }
 </style>
 </head>
@@ -147,6 +133,8 @@ a:hover {
 
 <h1>PARANORMAL ENTITY RESEARCH AGENCY DATABASE</h1>
 <p>WARNING: Unauthorized access will be logged.</p>
+
+<input type="text" id="searchBar" placeholder="Search subjects..." onkeyup="searchFiles()">
 
 <div class="layout">
 
@@ -197,23 +185,22 @@ function showCategory(category) {
     });
     document.getElementById(category).style.display = 'grid';
 }
-</script>
-    
-<script>
+
 function searchFiles() {
     let input = document.getElementById("searchBar").value.toLowerCase();
     let files = document.querySelectorAll(".file");
 
     files.forEach(file => {
         let text = file.innerText.toLowerCase();
+
         if (text.includes(input)) {
-            file.style.display = "block";
+            file.classList.remove("hidden");
         } else {
-            file.style.display = "none";
+            file.classList.add("hidden");
         }
     });
 }
 </script>
-    
+
 </body>
 </html>
