@@ -6,97 +6,80 @@
 <style>
 body {
     margin: 0;
-    background-color: #e8dcc0;
+    background: #dcd6c3;
     font-family: monospace;
-
-    background-image: linear-gradient(
-        rgba(0,0,0,0.02) 1px,
-        transparent 1px
-    );
-    background-size: 100% 4px;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(rgba(0,0,0,0.03), transparent 70%);
-    pointer-events: none;
-}
-
-/* DOCUMENT */
+/* MAIN DOCUMENT */
 .document {
-    background-color: #f5ecd7;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 40px auto;
-    padding: 30px;
+    background: #f5ecd7;
     border: 2px solid #999;
     box-shadow: 8px 8px 0px #aaa;
+    padding: 25px;
 }
 
-/* HEADER */
-.header {
-    border-bottom: 2px solid black;
-    margin-bottom: 20px;
-}
-
-/* STAMP */
+/* HEADER STAMP */
 .stamp {
-    color: red;
-    border: 3px solid red;
     display: inline-block;
-    padding: 5px 15px;
+    padding: 6px 14px;
+    border: 3px solid red;
+    color: red;
+    font-weight: bold;
     transform: rotate(-8deg);
-    font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* SECTIONS */
-.section {
-    margin-top: 20px;
+/* LAYOUT: LEFT INFO + RIGHT IMAGE */
+.layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 20px;
 }
 
-.label {
-    font-weight: bold;
+/* LEFT PANEL */
+.left {
+    border-right: 2px solid #a5946a;
+    padding-right: 20px;
+}
+
+/* RIGHT PANEL */
+.right {
+    text-align: center;
 }
 
 /* IMAGE */
 .doc-image {
     width: 100%;
-    max-width: 400px;
-    display: block;
-    margin: 20px auto;
     border: 2px solid #999;
 }
 
-/* REDACTION */
+/* SECTION STYLE */
+.section {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+/* REDACTED TEXT */
 .redacted {
-    background-color: black;
+    background: black;
     color: black;
+    padding: 2px 5px;
 }
 
-/* RELATED */
-.related {
-    margin-top: 30px;
-    border-top: 2px solid #a5946a;
-    padding-top: 15px;
-}
-
-.related-file {
-    display: block;
-    margin: 6px 0;
-    padding: 6px;
-    background: #d9c89e;
+/* CLASSIFICATION BOX */
+.class-box {
+    background: #e8dcc0;
+    padding: 10px;
     border: 1px solid #a5946a;
-}
-
-/* BACK LINK */
-.back {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 8px 12px;
-    background: #d9c89e;
-    border: 1px solid #a5946a;
+    margin-bottom: 10px;
 }
 </style>
 </head>
@@ -107,45 +90,92 @@ body::before {
 
 <div class="stamp">TOP SECRET</div>
 
-<div class="header">
-<h1>SUBJECT-001</h1>
-<p>Codename: Whisperwing</p>
-<p>Threat Level: HIGH</p>
-<p>Status: ACTIVE</p>
+<h1>ENTITY FILE</h1>
+
+<div class="layout">
+
+    <!-- LEFT SIDE: INFORMATION -->
+    <div class="left">
+
+        <div class="section">
+            <div class="label">Entity Name</div>
+            <div>Whisperwing</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Research ID</div>
+            <div>P.E.R.A-001</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Classification</div>
+            <div class="class-box">
+                Axis I: Threat Level — High<br>
+                Axis II: Behavior — Territorial Predator<br>
+                Axis III: Interaction — Reactive<br>
+                Axis IV: Physical State — Semi-Corporeal
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Habitat & Ecosystems</div>
+            <div>Mountain ranges, abandoned rural zones, high altitude fog zones.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Physical Description</div>
+            <div>
+                Large avian-like entity with elongated wings and no visible facial structure.
+                <br><b>Confirmed:</b> Winged morphology
+                <br><b>Speculated:</b> Echolocation-based hunting
+                <br><b>Unknown:</b> Internal structure
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Diet</div>
+            <div>Sound-based prey detection suggests auditory predators or energy absorption.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Threat Assessment</div>
+            <div>Multiple disappearances reported in affected zones. Strong avoidance advised.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Weaknesses</div>
+            <div>Disruption of high-frequency sound patterns appears to disorient entity.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Status</div>
+            <div>ACTIVE</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Researcher Notes</div>
+            <div class="redacted">
+                ████████████████████████
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE: IMAGE -->
+    <div class="right">
+
+        <img src="Monster 1.png" class="doc-image">
+
+        <p><b>VISUAL CONFIRMED</b></p>
+
+        <div class="section">
+            <div class="label">Image Notes</div>
+            <div>Captured via drone footage during coastal anomaly event.</div>
+        </div>
+
+    </div>
+
 </div>
-
-<img src="Monster 1.png" class="doc-image">
-
-<div class="section">
-<p class="label">Description:</p>
-<p>Write your monster description here...</p>
-</div>
-
-<div class="section">
-<p class="label">Behavior:</p>
-<p>Write behavior here...</p>
-</div>
-
-<div class="section">
-<p class="label">Notes:</p>
-<p class="redacted">████████████████████</p>
-</div>
-
-<!-- RELATED CASES (NOW INSIDE FILE) -->
-<div class="related">
-<h3>RELATED CASES</h3>
-
-<a href="subject002.html" class="related-file">
-SUBJECT-002 — Heartbeat
-</a>
-
-<a href="subject003.html" class="related-file">
-SUBJECT-003 — [NAME]
-</a>
-
-</div>
-
-<a href="index.html" class="back">← Return to Database</a>
 
 </div>
 
