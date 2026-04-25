@@ -4,8 +4,8 @@
     <title>P.E.R.A. Archive</title>
     <style>
         body {
-            background-color: #e8dcc0; /* paper color */
-    color: #1a1a1a;
+    margin: 0;
+    background-color: #e8dcc0;
     font-family: monospace;
     padding: 20px;
             a {
@@ -65,6 +65,7 @@ a:hover {
 
         .layout {
     display: flex;
+    min-height: 100vh;
 }
 
 .sidebar {
@@ -100,12 +101,25 @@ a:hover {
     background-color: #d9c89e;
     border: 2px solid #a5946a;
     padding: 15px;
+    position: relative;
     box-shadow: 4px 4px 0px #a5946a;
     transition: 0.2s;
 }
 
+        .file::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 60px;
+    height: 15px;
+    background-color: #cbb88a;
+    border: 2px solid #a5946a;
+    border-bottom: none;
+}
+
 .file:hover {
-    transform: rotate(-2deg) scale(1.03);
+    transform: translateY(-5px) rotate(-1deg);
     background-color: #cbb88a;
 }
 
@@ -114,6 +128,14 @@ a:hover {
     color: black;
     text-decoration: none;
 }
+
+        .file img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #a5946a;
+}
+        
     </style>
 </head>
 
@@ -151,7 +173,7 @@ function showCategory(category) {
                 <a href="subject001.html">
                     <h3>SUBJECT-001</h3>
                     <p>Whisperwing</p>
-                    <img src="monster1.png">
+                    <img src="Monster 1.png">
                 </a>
             </div>
 
