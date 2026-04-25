@@ -8,11 +8,7 @@ body {
     margin: 0;
     background-color: #e8dcc0;
     font-family: monospace;
-
-    background-image: linear-gradient(
-        rgba(0,0,0,0.02) 1px,
-        transparent 1px
-    );
+    background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
     background-size: 100% 4px;
 }
 
@@ -32,9 +28,7 @@ h1 {
     margin: 0;
 }
 
-p {
-    text-align: center;
-}
+p { text-align: center; }
 
 /* LAYOUT */
 .layout {
@@ -50,10 +44,6 @@ p {
     border-right: 2px solid #a5946a;
 }
 
-.sidebar h2 {
-    margin-top: 0;
-}
-
 #searchBar {
     width: 100%;
     padding: 8px;
@@ -64,7 +54,6 @@ p {
 }
 
 .sidebar button {
-    display: block;
     width: 100%;
     margin: 6px 0;
     padding: 8px;
@@ -73,35 +62,13 @@ p {
     cursor: pointer;
 }
 
-.sidebar button:hover {
-    background-color: #cbb88a;
-}
-
-/* DRAWERS */
-.drawer {
-    margin-bottom: 10px;
-}
-
-.drawer-title {
-    background: #bda97a;
-    padding: 10px;
-    cursor: pointer;
-    border: 1px solid #a5946a;
-    font-weight: bold;
-}
-
-.drawer-content {
-    display: none;
-    padding-left: 10px;
-}
-
 /* CONTENT */
 .content {
     flex: 1;
     padding: 20px;
 }
 
-/* CATEGORY GRID */
+/* CATEGORY */
 .category {
     display: none;
     grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
@@ -117,50 +84,23 @@ p {
 .file {
     background: #d9c89e;
     border: 2px solid #a5946a;
-    padding: 18px 15px 15px 15px;
+    padding: 18px;
     position: relative;
     box-shadow: 6px 6px 0px #a5946a;
-    transition: 0.25s ease;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .file:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     background: #cbb88a;
-    box-shadow: 12px 12px 0px #a5946a;
-}
-
-.file::before {
-    content: "";
-    position: absolute;
-    top: -14px;
-    left: 14px;
-    width: 95px;
-    height: 20px;
-    background: #cbb88a;
-    border: 2px solid #a5946a;
-    border-bottom: none;
-}
-
-.file::after {
-    content: "CASE FILE";
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    font-size: 10px;
-    opacity: 0.55;
 }
 
 .file img {
     width: 80%;
     display: block;
-    margin: 12px auto 0 auto;
+    margin: 10px auto;
     border: 1px solid #a5946a;
-}
-
-/* HIDDEN */
-.hidden {
-    display: none !important;
 }
 
 /* VIEWER */
@@ -186,24 +126,12 @@ p {
     overflow-y: auto;
     padding: 30px;
     border: 2px solid #999;
-    box-shadow: 10px 10px 0px #333;
 }
 
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    padding: 10px;
-    background: #d9c89e;
-    border: 1px solid #a5946a;
-    cursor: pointer;
-}
-
-    /* CLASSIFIED DOCUMENT STYLE */
+/* DOCUMENT STYLE */
 .document h1 {
     text-align: left;
-    border-bottom: 2px solid #000;
-    padding-bottom: 5px;
+    border-bottom: 2px solid black;
 }
 
 .stamp {
@@ -216,9 +144,7 @@ p {
     margin-bottom: 15px;
 }
 
-.section {
-    margin-top: 20px;
-}
+.section { margin-top: 20px; }
 
 .label {
     font-weight: bold;
@@ -238,7 +164,19 @@ p {
     color: black;
     padding: 2px 5px;
 }
-    
+
+/* hidden */
+.hidden { display: none !important; }
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 10px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+    cursor: pointer;
+}
 </style>
 </head>
 
@@ -253,65 +191,11 @@ p {
 <div class="sidebar">
 <h2>DATABASE</h2>
 
+<input id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
+
+<button onclick="showCategory('animal_predators')">Predators</button>
+
 <p id="counter">TOTAL FILES: 0</p>
-
-<input type="text" id="searchBar" placeholder="Search files..." onkeyup="searchFiles()">
-
-<div class="drawer">
-<div class="drawer-title" onclick="toggleDrawer(this)">Axis I: Threat Level</div>
-<div class="drawer-content">
-<button onclick="showCategory('threat_benign')">TL-0 | Benign</button>
-<button onclick="showCategory('threat_minimal')">TL-1 | Minimal</button>
-<button onclick="showCategory('threat_moderate')">TL-2 | Moderate</button>
-<button onclick="showCategory('threat_severe')">TL-3 | Severe</button>
-<button onclick="showCategory('threat_critical')">TL-4 | Critical</button>
-<button onclick="showCategory('threat_catastrophic')">TL-5 | Catastrophic</button>
-<button onclick="showCategory('threat_unknown')">TL-X | Unknown</button>
-</div>
-</div>
-
-<div class="drawer">
-<div class="drawer-title" onclick="toggleDrawer(this)">Axis II: Behavioral Class</div>
-<div class="drawer-content">
-<button onclick="showCategory('territorial_entities')">BC-T | Territorial</button>
-<button onclick="showCategory('brute_entities')">BC-B | Brute</button>
-<button onclick="showCategory('sleek_entities')">BC-S | Sleek</button>
-<button onclick="showCategory('observant_entities')">BC-O | Observant</button>
-<button onclick="showCategory('ambulatory_entities')">BC-A | Ambulatory</button>
-<button onclick="showCategory('ritualistic_entities')">BC-R | Ritualistic</button>
-<button onclick="showCategory('parasitic_entities')">BC-P | Parasitic</button>
-<button onclick="showCategory('intelligent_entities')">BC-I | Intelligent</button>
-<button onclick="showCategory('lurking_entities')">BC-L | Lurking</button>
-<button onclick="showCategory('mimetic_entities')">BC-M | Mimetic</button>
-<button onclick="showCategory('hunter_entities')">BC-H | Hunter</button>
-<button onclick="showCategory('collective_entities')">BC-C | Collective</button>
-<button onclick="showCategory('dormant_entities')">BC-D | Dormant</button>
-<button onclick="showCategory('unstable_entities')">BC-U | Unstable</button>
-</div>
-</div>
-
-<div class="drawer">
-<div class="drawer-title" onclick="toggleDrawer(this)">Axis III: Interaction Profile</div>
-<div class="drawer-content">
-<button onclick="showCategory('avoidant')">IP-AV | Avoidant</button>
-<button onclick="showCategory('neutral')">IP-NE | Neutral</button>
-<button onclick="showCategory('reactive')">IP-RE | Reactive</button>
-<button onclick="showCategory('aggressive')">IP-AG | Aggressive</button>
-<button onclick="showCategory('manipulative')">IP-MA | Manipulative</button>
-</div>
-</div>
-
-    <div class="drawer">
-<div class="drawer-title" onclick="toggleDrawer(this)">Axis IV: Physical State</div>
-<div class="drawer-content">
-<button onclick="showCategory('corporeal')">PS-C | Corporeal</button>
-<button onclick="showCategory('semi-corporeal')">PS-S | Semi-Corporeal</button>
-<button onclick="showCategory('incorporeal')">PS-I  | Incorporeal</button>
-<button onclick="showCategory('metamorphic')">PS-M | Metamorphic</button>
-<button onclick="showCategory('unknown')">PS-U | Unknown</button>
-</div>
-</div>
-    
 </div>
 
 <!-- CONTENT -->
@@ -319,7 +203,7 @@ p {
 
 <!-- VIEWER -->
 <div id="viewer" class="viewer">
-<    div id="viewerContent" class="viewer-content document"></div>
+    <div id="viewerContent" class="viewer-content document"></div>
     <button onclick="closeViewer()" class="close-btn">CLOSE FILE</button>
 </div>
 
@@ -340,119 +224,66 @@ p {
 
 </div>
 
-<div id="animal_passive" class="category"></div>
-<div id="fusion_entities" class="category"></div>
-<div id="corrupted_forms" class="category"></div>
-<div id="spectral" class="category"></div>
-<div id="dimensional" class="category"></div>
-
 </div>
 </div>
 
 <!-- SCRIPTS -->
 <script>
-function showCategory(category) {
-document.querySelectorAll('.category').forEach(div => {
-div.classList.remove('active');
-});
-document.getElementById(category).classList.add('active');
+function showCategory(id){
+document.querySelectorAll('.category').forEach(c=>c.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-function searchFiles() {
-let input = document.getElementById("searchBar").value.toLowerCase();
-let files = document.querySelectorAll(".file");
-
-files.forEach(file => {
-let text = file.innerText.toLowerCase();
-
-if (text.includes(input)) {
-file.classList.remove("hidden");
-} else {
-file.classList.add("hidden");
-}
-});
-}
-
-function toggleDrawer(element) {
-let content = element.nextElementSibling;
-content.style.display = content.style.display === "block" ? "none" : "block";
-}
-
-function openFile(fileId) {
-const data = document.getElementById(fileId).innerHTML;
-document.getElementById("viewerContent").innerHTML = data;
+function openFile(id){
+document.getElementById("viewerContent").innerHTML =
+document.getElementById(id).innerHTML;
 document.getElementById("viewer").classList.add("active");
 }
 
-function closeViewer() {
+function closeViewer(){
 document.getElementById("viewer").classList.remove("active");
 }
 
-function updateCounter() {
-const count = document.querySelectorAll(".category .file").length;
-document.getElementById("counter").innerText = "TOTAL FILES: " + count;
+function searchFiles(){
+let v = document.getElementById("searchBar").value.toLowerCase();
+document.querySelectorAll(".file").forEach(f=>{
+f.classList.toggle("hidden", !f.innerText.toLowerCase().includes(v));
+});
 }
 
-updateCounter();
+document.getElementById("counter").innerText =
+"TOTAL FILES: " + document.querySelectorAll(".file").length;
 </script>
 
-<!-- HIDDEN FILE DATA -->
+<!-- FILE DATA -->
 <div id="file1" class="hidden">
+<div class="stamp">TOP SECRET</div>
 <h1>SUBJECT-001</h1>
-<p>Codename: Whisperwing</p>
-<p>Threat Level: HIGH</p>
-<img src="Monster 1.png" style="width:300px; display:block; margin:auto;">
-<p><b>Description:</b> Write your description...</p>
-<p><b>Behavior:</b> Write behavior...</p>
+<p><b>Codename:</b> Whisperwing</p>
+<img src="Monster 1.png" class="doc-image">
+
+<div class="section">
+<p class="label">DESCRIPTION</p>
+<p>A winged entity...</p>
+</div>
+
+<div class="section">
+<p class="label">BEHAVIOR</p>
+<p>Highly reactive to sound...</p>
+</div>
+
+<div class="section">
+<p class="label">NOTES</p>
+<p class="redacted">████████████████</p>
+</div>
 </div>
 
 <div id="file2" class="hidden">
+<div class="stamp">TOP SECRET</div>
 <h1>SUBJECT-002</h1>
-<p>Codename: Heartbeat</p>
-<p>Threat Level: UNKNOWN</p>
+<p><b>Codename:</b> Heartbeat</p>
+<img src="https://via.placeholder.com/300" class="doc-image">
 </div>
 
-    <div id="file1" class="hidden">
-    <div class="stamp">TOP SECRET</div>
-
-    <h1>SUBJECT-001</h1>
-
-    <p><b>Codename:</b> Whisperwing</p>
-    <p><b>Threat Level:</b> HIGH</p>
-
-    <img src="Monster 1.png" class="doc-image">
-
-    <div class="section">
-        <p class="label">DESCRIPTION</p>
-        <p>A winged entity observed near rural zones...</p>
-    </div>
-
-    <div class="section">
-        <p class="label">BEHAVIOR</p>
-        <p>Highly reactive to sound frequencies above 8kHz.</p>
-    </div>
-
-    <div class="section">
-        <p class="label">RESTRICTED NOTES</p>
-        <p class="redacted">████████████████████████</p>
-    </div>
-</div>
-
-    <div id="file2" class="hidden">
-    <div class="stamp">TOP SECRET</div>
-
-    <h1>SUBJECT-002</h1>
-
-    <p><b>Codename:</b> Heartbeat</p>
-    <p><b>Threat Level:</b> UNKNOWN</p>
-
-    <img src="https://via.placeholder.com/300" class="doc-image">
-
-    <div class="section">
-        <p class="label">DESCRIPTION</p>
-        <p>Unknown biological rhythm detected in abandoned structures.</p>
-    </div>
-</div>
-    
 </body>
 </html>
