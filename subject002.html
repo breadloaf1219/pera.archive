@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CASE FILE</title>
+
+<style>
+body {
+    margin: 0;
+    background: #dcd6c3;
+    font-family: monospace;
+}
+    
+/* MAIN DOCUMENT */
+.document {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #f5ecd7;
+    border: 2px solid #999;
+    box-shadow: 8px 8px 0px #aaa;
+    padding: 25px;
+}
+
+/* HEADER STAMP */
+.stamp {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 3px solid red;
+    color: red;
+    font-weight: bold;
+    transform: rotate(-8deg);
+    margin-bottom: 15px;
+}
+
+/* LAYOUT: LEFT INFO + RIGHT IMAGE */
+.layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 20px;
+}
+
+/* LEFT PANEL */
+.left {
+    border-right: 2px solid #a5946a;
+    padding-right: 20px;
+}
+
+/* RIGHT PANEL */
+.right {
+    text-align: center;
+}
+
+/* IMAGE */
+.doc-image {
+    width: 100%;
+    border: 2px solid #999;
+}
+
+/* SECTION STYLE */
+.section {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+/* REDACTED TEXT */
+.redacted {
+    background: black;
+    color: black;
+    padding: 2px 5px;
+}
+
+/* CLASSIFICATION BOX */
+.class-box {
+    background: #e8dcc0;
+    padding: 10px;
+    border: 1px solid #a5946a;
+    margin-bottom: 10px;
+}
+
+    .back-btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 8px 12px;
+    background: #d9c89e;
+    border: 1px solid #a5946a;
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+}
+
+.back-btn:hover {
+    background: #cbb88a;
+}
+</style>
+</head>
+
+<body>
+    
+    <a href="index.html" class="back-btn">← BACK TO ARCHIVE</a>
+
+<div class="document">
+
+<div class="stamp">TOP SECRET</div>
+
+<h1>ENTITY FILE</h1>
+
+<div class="layout">
+
+    <!-- LEFT SIDE: INFORMATION -->
+    <div class="left">
+
+        <div class="section">
+            <div class="label">Entity Name</div>
+            <div>Whisperwing</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Research ID</div>
+            <div>P.E.R.A-002</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Classification</div>
+            <div>
+                Axis I: Threat Level — High<br>
+                Axis II: Behavior — Territorial Predator<br>
+                Axis III: Interaction — Reactive<br>
+                Axis IV: Physical State — Semi-Corporeal
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Habitat & Ecosystems</div>
+            <div>Mountain ranges, abandoned rural zones, high altitude fog zones.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Physical Description</div>
+            <div>
+                Large avian-like entity with elongated wings and no visible facial structure.
+                <br><b>Confirmed:</b> Winged morphology
+                <br><b>Speculated:</b> Echolocation-based hunting
+                <br><b>Unknown:</b> Internal structure
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Diet</div>
+            <div>Sound-based prey detection suggests auditory predators or energy absorption.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Threat Assessment</div>
+            <div>Multiple disappearances reported in affected zones. Strong avoidance advised.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Known Weaknesses</div>
+            <div>Disruption of high-frequency sound patterns appears to disorient entity.</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Status</div>
+            <div>ACTIVE</div>
+        </div>
+
+        <div class="section">
+            <div class="label">Researcher Notes</div>
+            <div class="redacted">
+                ████████████████████████
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE: IMAGE -->
+    <div class="right">
+
+        <img src="Monster 1.png" class="doc-image">
+
+        <p><b>VISUAL CONFIRMED</b></p>
+
+        <div class="section">
+            <div class="label">Image Notes</div>
+            <div>Captured via drone footage during coastal anomaly event.</div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
