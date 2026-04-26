@@ -56,6 +56,21 @@ a {
     border-right: 2px solid #a5946a;
 }
 
+.sidebar button {
+    display: block;
+    width: 100%;
+    margin: 6px 0;
+    padding: 8px;
+    background-color: #d9c89e;
+    border: 1px solid #a5946a;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.sidebar button:hover {
+    background-color: #cbb88a;
+}
+
 #searchBar {
     width: 100%;
     padding: 8px;
@@ -81,6 +96,11 @@ a {
 .drawer-content {
     display: none;
     padding-left: 10px;
+}
+
+.drawer-content button {
+    font-size: 13px;
+    text-align: left;
 }
 
 /* CONTENT */
@@ -277,7 +297,8 @@ a {
 <div class="drawer-content"> 
 <button onclick="showCategory('corporeal')">PS-C | Corporeal</button> 
 <button onclick="showCategory('semi-corporeal')">PS-S | Semi-Corporeal</button> 
-<button onclick="showCategory('incorporeal')">PS-I | Incorporeal</button> <button onclick="showCategory('metamorphic')">PS-M | Metamorphic</button> 
+<button onclick="showCategory('incorporeal')">PS-I | Incorporeal</button> 
+<button onclick="showCategory('metamorphic')">PS-M | Metamorphic</button> 
 <button onclick="showCategory('unknown')">PS-U | Unknown</button> 
 </div> 
 </div> 
@@ -324,18 +345,6 @@ el.nextElementSibling.style.display =
 el.nextElementSibling.style.display === "block" ? "none" : "block";
 }
 
-    function openFile(id) {
-let content = document.getElementById(id).innerHTML;
-
-document.getElementById("viewerContent").innerHTML =
-'<div class="back-btn" onclick="closeViewer()">← BACK TO ARCHIVE</div>' + content;
-
-document.getElementById("viewer").classList.add("active");
-}
-
-function closeViewer() {
-document.getElementById("viewer").classList.remove("active");
-}
 </script>
 
 </body>
