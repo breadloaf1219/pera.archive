@@ -4,6 +4,45 @@
 <title>P.E.R.A. Archive</title>
 
 <style>
+
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #cbb88a;
+    border-bottom: 3px solid #1a1a1a;
+    padding: 10px 20px;
+}
+
+.logo {
+    height: 60px;
+}
+
+.title-group h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.title-group p {
+    margin: 0;
+    font-size: 12px;
+    text-align: left;
+}
+
+.navbar {
+    background: #bda97a;
+    padding: 10px;
+    display: flex;
+    gap: 15px;
+    border-bottom: 2px solid #a5946a;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+    
 body {
     margin: 0;
     background-color: #e8dcc0;
@@ -24,6 +63,17 @@ body::before {
     pointer-events: none;
 }
 
+.popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f5ecd7;
+    padding: 20px;
+    border: 2px solid #999;
+    box-shadow: 5px 5px 0px #333;
+}
+    
 /* HEADER */
 h1 {
     text-align: center;
@@ -234,7 +284,30 @@ a {
 </head>
 
 <body>
+    
+<div class="topbar">
+    <img src="pera-logo.png" class="logo">
+    <div class="title-group">
+        <h1>P.E.R.A.</h1>
+        <p>Paranormal Entity Research Archive</p>
+    </div>
+</div>
 
+<div class="navbar">
+    <a href="index.html">Archive</a>
+    <a href="about.html">About</a>
+    <a href="staff.html">Personnel</a>
+    <a href="incidents.html">Incidents</a>
+    <a href="videos.html">Videos</a>
+    <a href="contests.html">Contests</a>
+</div>
+
+ <div id="contactBox" class="popup hidden">
+    <p>Email: your@email.com</p>
+    <p>YouTube: yourchannel</p>
+    <button onclick="hideContact()">Close</button>
+</div>
+    
 <h1>PARANORMAL RESEARCH ARCHIVE</h1>
 <p>WARNING: Unauthorized access will be logged.</p>
 
@@ -389,6 +462,14 @@ function filterFiles(type, value) {
     document.querySelectorAll(".file").forEach(file => {
         file.style.display = "block";
     });
+}
+
+    function showContact() {
+    document.getElementById("contactBox").classList.remove("hidden");
+}
+
+function hideContact() {
+    document.getElementById("contactBox").classList.add("hidden");
 }
     
 </script>
