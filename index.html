@@ -439,7 +439,7 @@ a {
    data-threat="severe"
    data-behavioral="territorial"
    data-interaction="reactive"
-   data-physical="semi-corporeal">
+   data-physical="semicorporeal">
 <h3>SUBJECT-001</h3>
 <p>Whisperwing</p>
 <img src="Monster 1.png">
@@ -497,6 +497,9 @@ a {
 </div>
 
 <script>
+
+let activeFilters = {};
+    
 function showCategory(category) {
 document.querySelectorAll('.category').forEach(div => div.classList.remove('active'));
 document.getElementById(category).classList.add('active');
@@ -515,16 +518,25 @@ el.nextElementSibling.style.display === "block" ? "none" : "block";
 }
     
 function filterFiles(type, value) {
+    activeFilters[type] = value;
+
     document.querySelectorAll(".file").forEach(file => {
-        if (file.dataset[type] === value) {
-            file.style.display = "block";
-        } else {
-            file.style.display = "none";
+        let show = true;
+
+        for (let key in activeFilters) {
+            if (file.dataset[key] !== activeFilters[key]) {
+                show = false;
+                break;
+            }
         }
+
+        file.style.display = show ? "block" : "none";
     });
 }
 
     function resetFilters() {
+    activeFilters = {};
+
     document.querySelectorAll(".file").forEach(file => {
         file.style.display = "block";
     });
