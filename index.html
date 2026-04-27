@@ -290,6 +290,23 @@ a {
     border-left: 2px solid #a5946a;
 }
 
+    .right-link {
+    display: block;
+    background: #d9c89e;
+    border: 2px solid #a5946a;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 4px 4px 0px #a5946a;
+    transition: 0.2s;
+}
+
+.right-link:hover {
+    background: #cbb88a;
+    transform: translateY(-3px);
+}
+
 /* Timeline styling */
 .timeline {
     font-size: 12px;
@@ -463,22 +480,15 @@ a {
     
 <!-- RIGHT SIDEBAR -->
 <div class="rightbar">
-    
-    <h3>Incident Timeline</h3>
-<div class="timeline">
-    <a href="incidents.html">
-        <p><b>[04/20]</b> SUBJECT-001 sighted in rural zone</p>
-        <p><b>[04/18]</b> Unknown signal detected</p>
-        <p><b>[04/15]</b> Research team dispatched</p>
-    </a>
-</div>
 
-    <h3>Recent Entities</h3>
-<div class="timeline">
-    <a href="recent.html">
-        <p>SUBJECT-002 — Heartbeat</p>
-        <p>SUBJECT-001 — Whisperwing</p>
+    <a href="incidents.html" class="right-link">
+        <h3>Incident Timeline</h3>
     </a>
+
+    <a href="recent.html" class="right-link">
+        <h3>Recent Entities</h3>
+    </a>
+
 </div>
 
 </div>
