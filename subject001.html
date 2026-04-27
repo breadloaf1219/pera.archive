@@ -96,6 +96,20 @@ body {
 .back-btn:hover {
     background: #cbb88a;
 }
+
+    .locked {
+    background: #222;
+    color: #ff4444;
+    padding: 10px;
+    border: 2px dashed red;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+    
 </style>
 </head>
 
@@ -170,11 +184,18 @@ body {
         </div>
 
         <div class="section">
-            <div class="label">Researcher Notes</div>
-            <div class="redacted">
-                ████████████████████████
-            </div>
-        </div>
+    <div class="label">Researcher Notes</div>
+
+    <div class="locked" data-clearance="3">
+        🔒 Clearance Level 3 Required
+    </div>
+
+    <div class="clearance-content hidden" data-clearance="3">
+        Subject displays non-linear movement patterns between observation points.
+        Possible dimensional phase shifting.
+    </div>
+
+</div>
 
     </div>
 
@@ -195,6 +216,29 @@ body {
 </div>
 
 </div>
+    
+<script>
+    let userClearance = 1; // CHANGE THIS TO TEST (1–5)
 
+document.querySelectorAll(".locked").forEach(lock => {
+    lock.addEventListener("click", () => {
+        let required = parseInt(lock.dataset.clearance);
+
+        if (userClearance >= required) {
+            lock.style.display = "none";
+
+            document.querySelectorAll(".clearance-content").forEach(content => {
+                if (parseInt(content.dataset.clearance) === required) {
+                    content.classList.remove("hidden");
+                }
+            });
+
+        } else {
+            alert("ACCESS DENIED: INSUFFICIENT CLEARANCE");
+        }
+    });
+});
+    <script>
+        
 </body>
 </html>
