@@ -96,6 +96,7 @@ a {
 .layout {
     display: flex;
     min-height: 100vh;
+    align-items: stretch;
 }
 
 /* SIDEBAR */
@@ -280,6 +281,27 @@ a {
 .back-btn:hover {
     background: #cbb88a;
 }
+
+    .rightbar {
+    width: 220px;
+    background-color: #cbb88a;
+    padding: 15px;
+    border-left: 2px solid #a5946a;
+}
+
+/* Timeline styling */
+.timeline {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.timeline p {
+    text-align: left;
+    margin: 6px 0;
+    border-bottom: 1px solid #a5946a;
+    padding-bottom: 4px;
+}
+    
 </style>
 </head>
 
@@ -377,6 +399,22 @@ a {
 <button onclick="filterFiles('state','unknown')">PS-U | Unknown</button> 
 </div> 
 </div> 
+
+    <!-- RIGHT SIDEBAR -->
+<div class="rightbar">
+
+    <h3>Incident Timeline</h3>
+    <div class="timeline">
+        <p><b>[04/20]</b> SUBJECT-001 sighted in rural zone</p>
+        <p><b>[04/18]</b> Unknown signal detected</p>
+        <p><b>[04/15]</b> Research team dispatched</p>
+    </div>
+
+    <h3>Recent Entities</h3>
+    <div class="timeline">
+        <p>SUBJECT-002 — Heartbeat</p>
+        <p>SUBJECT-001 — Whisperwing</p>
+    </div>
 
 </div>
 
